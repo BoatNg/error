@@ -1,0 +1,7 @@
+{
+  "apps" : [{
+    "script"    : "egg-scripts start --daemon",
+    "instances" : "max",
+    "exec_mode" : "cluster"
+  }]
+}

@@ -17,7 +17,7 @@ module.exports = app => {
             data.variable = mapData.name;
             const res = yield ctx.model.ErrorM.create(data);
             // TODO 写入log文件
-            return data;
+            return res;
         }
         consumeMap(data) {
             const line = +data.row
