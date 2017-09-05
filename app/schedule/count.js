@@ -17,11 +17,11 @@ module.exports = {
         };
         const result = yield ctx.model.ReportM.create(data);
         var transporter = nodemailer.createTransport({  
-        service: 'qq',  
-        auth: {  
-            user: '465024099@qq.com',  
-            pass: 'rmnyzrflpfjobgeb'  
-        }  
+            service: 'qq',  
+            auth: {  
+                user: '465024099@qq.com',  
+                pass: 'rmnyzrflpfjobgeb'  
+            }  
         });
         var mailOptions = {  
             from: '465024099@qq.com', // 发送者  
@@ -32,8 +32,8 @@ module.exports = {
         };  
         transporter.sendMail(mailOptions, function (err, info) {  
             if (err) {  
-            console.log(err);  
-            return;  
+                console.log(err);  
+                return;  
             }  
 
             console.log('发送成功');  
