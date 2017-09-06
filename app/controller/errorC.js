@@ -1,9 +1,12 @@
+const paramRule = {
+    file: { type: 'string', required: true },
+};
 module.exports = app => {
     class ErrorController extends app.Controller {
         *insert() {
             const { ctx } = this;
+            ctx.validate(createRule);
             const body = ctx.request.query;
-            // TODO 加上UA等信息
             const host = ctx.host;
             const ip = ctx.ip;
             const cookie = ctx.get('cookie');

@@ -16,7 +16,9 @@ module.exports = app => {
                 dataType: 'json',
                 timeout: 3000,
             });
-            app.keyLogger(`service-errorS-insert`, this.sourceMap);
+            if( typeof this.sourceMap.data !== 'object') {
+                app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
+            }
             const mapData = this.consumeMap(data)
             const res = yield ctx.model.ErrorM.create(mapData);
             // TODO 写入log文件
@@ -36,9 +38,6 @@ module.exports = app => {
             data.variable = mapData.name;
             return data
         }
-        // dndcLogger(info) {
-        //   return app.getLogger('dndcLogger').info('This is a ERROR Message', info);
-        // }
         *ajaxInsert(data) {
             const { ctx } = this;
             const _db = ctx.model.ErrorM;
