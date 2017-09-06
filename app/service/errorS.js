@@ -1,7 +1,7 @@
 const sourceMap = require('source-map');
 const rf=require("fs");  
-const data=rf.readFileSync("./app/sourcemap/bundle.js.map","utf-8");
-const rawSourceMap = JSON.parse(data);
+// const data=rf.readFileSync("./app/sourcemap/bundle.js.map","utf-8");
+// const rawSourceMap = JSON.parse(data);
 module.exports = app => {
     class ErrorService extends app.Service {
         
@@ -9,9 +9,12 @@ module.exports = app => {
             const { ctx } = this;
             const _db = ctx.model.ErrorM;
             // TODO source map 
-            const mapData = this.consumeMap(data)
-            console.log("mapData")
-            console.log(mapData)
+            const result = yield ctx.curl(`${data.file}.map`, {
+                dataType: 'json',
+                timeout: 3000,
+            });
+            console.log(result);
+            const mapData = this.consumeMap(result)
             data.row = mapData.line;
             data.col = mapData.column;
             data.variable = mapData.name;

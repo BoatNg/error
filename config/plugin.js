@@ -3,11 +3,6 @@ exports.nunjucks = {
     enable: true,
     package: 'egg-view-nunjucks'
 }
-// ORM
-exports.sequelize = {
-    enable: false,
-    package: 'egg-sequelize'
-}
 // ORM-MongoDB
 exports.mongoose = {
   enable: true,
@@ -19,8 +14,6 @@ exports.validate = {
     package: 'egg-validate'
 }
 // 关闭内置的 cluster 插件
-module.exports = {
-  cluster: {
+module.cluster = {
     enable: false,
-  },
 }
