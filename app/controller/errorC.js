@@ -15,7 +15,6 @@ module.exports = app => {
                 userAgent,
                 host
             }
-            console.log(opt);
             const data = yield ctx.service.errorS.insert(opt);
             ctx.body = data;
         }
