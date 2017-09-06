@@ -17,3 +17,8 @@ exports.validate = {
 module.cluster = {
     enable: false,
 }
+// 日志切割
+exports.logrotator = {
+  enable: true,
+  package: 'egg-logrotator',
+};
