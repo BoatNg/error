@@ -8,13 +8,7 @@ module.exports = app => {
             const ip = ctx.ip;
             const cookie = ctx.get('cookie');
             const userAgent = ctx.get('User-Agent');
-            const opt = {
-                ...body,
-                ip,
-                cookie,
-                userAgent,
-                host
-            }
+            const opt = {...body, ip, cookie, userAgent, host}
             const data = yield ctx.service.errorS.insert(opt);
             ctx.body = data;
         }
