@@ -20,10 +20,9 @@ module.exports = app => {
                 app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
             }
             const mapData = this.consumeMap(data)
-            const res = yield ctx.model.ErrorM.create(mapData);
-            // TODO 写入log文件
-            app.dndcLogger(res);
-            return res;
+            //const res = yield ctx.model.ErrorM.create(mapData);
+            app.dndcLogger(mapData);
+            return mapData;
         }
         consumeMap(data) {
             const line = +data.row
@@ -40,9 +39,10 @@ module.exports = app => {
         }
         *ajaxInsert(data) {
             const { ctx } = this;
-            const _db = ctx.model.ErrorM;
-            const res = yield ctx.model.AjaxErrorM.create(data);
-            return res;
+            // const _db = ctx.model.ErrorM;
+            // const res = yield ctx.model.AjaxErrorM.create(data);
+            app.dndcLogger(data);
+            return data;
         }
     }
     return ErrorService;

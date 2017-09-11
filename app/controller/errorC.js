@@ -5,8 +5,13 @@ module.exports = app => {
     class ErrorController extends app.Controller {
         *insert() {
             const { ctx } = this;
-            ctx.validate(createRule);
+            //ctx.validate(paramRule);
             const body = ctx.request.query;
+            if( !body.file ) {
+                ctx.status = 422;
+                ctx.body = 'script file is required'
+                return
+            }
             const host = ctx.host;
             const ip = ctx.ip;
             const cookie = ctx.get('cookie');

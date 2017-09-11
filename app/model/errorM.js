@@ -1,4 +1,4 @@
-module.exports = app => {
+/* module.exports = app => {
   const mongoose = app.mongoose;
   const ErrorSchema = new mongoose.Schema({
     msg: { type: String  },
@@ -15,4 +15,4 @@ module.exports = app => {
 
   return mongoose.model('ErrorM', ErrorSchema);
 
-}
+} */

@@ -5,7 +5,7 @@ exports.nunjucks = {
 }
 // ORM-MongoDB
 exports.mongoose = {
-  enable: true,
+  enable: false,
   package: 'egg-mongoose',
 }
 // validate

@@ -7,10 +7,10 @@ exports.view = {
         '.tpl': 'nunjucks',
     },
 };
-exports.mongoose = {
+/* exports.mongoose = {
   url: 'mongodb://127.0.0.1/test',
   options: {}
-};
+}; */
 exports.jsonp = {
   whiteList: '127.0.0.1',
   callback: 'callback', // 识别 query 中的 `callback` 参数
