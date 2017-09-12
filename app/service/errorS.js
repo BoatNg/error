@@ -18,6 +18,8 @@ module.exports = app => {
             });
             if( typeof this.sourceMap.data !== 'object') {
                 app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
+                app.dndcLogger(data);
+                return data;
             }
             const mapData = this.consumeMap(data)
             //const res = yield ctx.model.ErrorM.create(mapData);
