@@ -28,21 +28,26 @@ npm stop // 项目停止
 ```
 
 ---
+### 版本记录
+- 1.0.0
+    - javascript window.onerror 接口
+    - 写入log日志文件
 
+---
 ### 杂项
-#### log文件所在目录
+###### log文件所在目录
 ```
 ./myLog/dndc/dndc.log  // 前端采集上来的错误信息
 ./myLog/key/key.log    // 本项目的打点信息
 
 ```
 
-#### 项目github地址
+###### 项目github地址
 ```
 git@github.com:BoalNg/error.git
 ```
 
-#### 日志格式
+###### 日志格式
 ```
 // ./myLog/dndc/dndc.log
 
@@ -59,7 +64,7 @@ git@github.com:BoalNg/error.git
   variable: 'guotouqian' }
 ```
 
-#### monogDB下载地址
+###### monogDB下载地址
 
 链接：http://pan.baidu.com/s/1bpuAorH 密码：usnr
 
