@@ -10,7 +10,7 @@ module.exports = app => {
         }
         *insert (data) {
             const { ctx } = this;
-            const _db = ctx.model.ErrorM;
+            // const _db = ctx.model.ErrorM;
             // TODO source map 
             this.sourceMap = yield ctx.curl(`${data.file}.map`, {
                 dataType: 'json',
