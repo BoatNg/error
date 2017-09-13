@@ -2,6 +2,7 @@ const sourceMap = require('source-map');
 const rf=require("fs");  
 // const data=rf.readFileSync("./app/sourcemap/bundle.js.map","utf-8");
 // const rawSourceMap = JSON.parse(data);
+
 module.exports = app => {
     class ErrorService extends app.Service {
         constructor(pra){
@@ -10,13 +11,19 @@ module.exports = app => {
         }
         *insert (data) {
             const { ctx } = this;
-            // const _db = ctx.model.ErrorM;
-            // TODO source map 
-            this.sourceMap = yield ctx.curl(`${data.file}.map`, {
-                dataType: 'json',
-                timeout: 3000,
-            });
-            if( typeof this.sourceMap.data !== 'object') {
+            try {
+                this.sourceMap = yield ctx.curl(`${data.file}.map`, {
+                    dataType: 'json',
+                    timeout: 3000,
+                });
+            } catch (e) {
+                // http连接不成功
+                app.keyLogger('service-errorS-insert-sourceMap-requestError:',e);
+                app.dndcLogger(data);
+                return data;
+            }
+            if( !this.sourceMap.data ) {
+                // http连接成功 但获取不到data的值
                 app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
                 app.dndcLogger(data);
                 return data;
