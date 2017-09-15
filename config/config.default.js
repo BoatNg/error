@@ -12,7 +12,7 @@ exports.view = {
   options: {}
 }; */
 exports.jsonp = {
-  whiteList: ['www.chebaba.com','chebaba.com','passport.chebaba.com','user.chebaba.com','127.0.0.1'],
+  whiteList: ['www.chebaba.com','chebaba.com','passport.chebaba.com','user.chebaba.com','127.0.0.1','vb-www.chebaba.com'],
   callback: 'callback', // 识别 query 中的 `callback` 参数
   limit: 150, // 函数名最长为 100 个字符
 };
