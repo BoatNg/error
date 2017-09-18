@@ -30,8 +30,8 @@ module.exports = app => {
                 app.dndcLogger(data);
                 return data;
             }
-            data.serviceStatu = 'source map success';
-            const mapData = this.consumeMap(data)
+            const mapData = this.consumeMap(data);
+            mapData.serviceStatu = 'source map success';
             //const res = yield ctx.model.ErrorM.create(mapData);
             app.dndcLogger(mapData);
             return mapData;
