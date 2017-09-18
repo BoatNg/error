@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start server.js",
-    "stop": "pm2 stop server",
-    "dev": "egg-bin dev",
-    "migrate:new": "egg-sequelize migration:create",
-    "migrate:up": "egg-sequelize db:migrate",
-    "migrate:down": "egg-sequelize db:migrate:undo"
+    "start": "pm2 start processes.json",
+    "stop": "pm2 stop processes.json",
+    "dev": "egg-bin dev"
   },
   "author": "",
   "license": "ISC",

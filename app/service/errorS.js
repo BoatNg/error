@@ -18,16 +18,19 @@ module.exports = app => {
                 });
             } catch (e) {
                 // http连接不成功
-                app.keyLogger('service-errorS-insert-sourceMap-requestError:',e);
+                //app.keyLogger('service-errorS-insert-sourceMap-requestError:',e);
+                data.serviceStatu = 'http connect error';
                 app.dndcLogger(data);
                 return data;
             }
             if( !this.sourceMap.data ) {
                 // http连接成功 但获取不到data的值
-                app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
+                //app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
+                data.serviceStatu = 'no source map';
                 app.dndcLogger(data);
                 return data;
             }
+            data.serviceStatu = 'source map success';
             const mapData = this.consumeMap(data)
             //const res = yield ctx.model.ErrorM.create(mapData);
             app.dndcLogger(mapData);
