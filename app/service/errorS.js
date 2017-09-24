@@ -1,5 +1,6 @@
 const sourceMap = require('source-map');
-const rf=require("fs");  
+const typeDB = require('../myModel/errorMsgType.js');
+//const rf=require("fs");
 // const data=rf.readFileSync("./app/sourcemap/bundle.js.map","utf-8");
 // const rawSourceMap = JSON.parse(data);
 
@@ -8,7 +9,7 @@ module.exports = app => {
         constructor(pra){
             super(pra);
             this.sourceMap = {}
-        }
+        } 
         *insert (data) {
             const { ctx } = this;
             try {
@@ -20,21 +21,27 @@ module.exports = app => {
                 // http连接不成功
                 //app.keyLogger('service-errorS-insert-sourceMap-requestError:',e);
                 data.serviceStatu = 'http connect error';
-                app.dndcLogger(data);
+                this.logMessage(data);
                 return data;
             }
             if( !this.sourceMap.data ) {
                 // http连接成功 但获取不到data的值
                 //app.keyLogger(`service-errorS-insert-sourceMap:`, this.sourceMap);
                 data.serviceStatu = 'no source map';
-                app.dndcLogger(data);
+                this.logMessage(data);
                 return data;
             }
             const mapData = this.consumeMap(data);
             mapData.serviceStatu = 'source map success';
             //const res = yield ctx.model.ErrorM.create(mapData);
-            app.dndcLogger(mapData);
+            this.logMessage(mapData);
             return mapData;
+        }
+        logMessage(obj) {
+            typeDB[obj.msg] = true;
+            console.log('******************')
+            console.log(typeDB)
+            app.dndcLogger(obj);
         }
         consumeMap(data) {
             const line = +data.row
