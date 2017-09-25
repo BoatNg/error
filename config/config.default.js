@@ -33,6 +33,6 @@ exports.customLogger = {
     level: 'INFO',
   },
   keyLogger: {
-    file: path.join('./', 'mylog/key/key.log'),
+    file: path.join('./', 'myLog/key/key.log'),
   }
 }

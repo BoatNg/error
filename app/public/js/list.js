@@ -1,9 +1,7 @@
 module.exports = function() {
-    console.log('========================')
     var domain = 'http://127.0.0.1:7001'
     var flag = true;
     window.onload = function() {
-        console.log($)
         // CSRF
         var csrftoken = getCookie('csrfToken');
         function csrfSafeMethod(method) {
@@ -25,12 +23,10 @@ module.exports = function() {
         });
     }
     $(document).ajaxError(function() {
-        console.log('***********')
         if(!flag) return;
         flag = false;
         var arg = arguments;
         var now = new Date();
-        console.log(now);
         $.ajax({
             url:domain + '/api/v1/ajaxError',
             method:'GET',
@@ -47,7 +43,6 @@ module.exports = function() {
     });
     window.onerror = function(type, file, line, row) {
         var nowTime = new Date();
-        console.log(nowTime);
         $.ajax({
             url:domain + '/api/v1/errord',
             method:'GET',

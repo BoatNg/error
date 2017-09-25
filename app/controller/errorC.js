@@ -1,21 +1,23 @@
-const paramRule = {
-    file: { type: 'string', required: true },
-};
 const uaPaser = require('ua-parser-js');
 const typeDB = require("../myModel/errorMsgType.js");
+const timesDB = require("../myModel/timesCount.js");
 module.exports = app => {
     class ErrorController extends app.Controller {
         *insert() {
             const { ctx } = this;
-            //ctx.validate(paramRule);
             const body = ctx.request.query;
+            this.countFuc(body.msg);
             const filter = this.filterFuc(body);
-            console.log('========================')
             if(filter.res) {
                 ctx.status = filter.status;
                 ctx.body = filter.body;
                 return
             }
+            ctx.body = {
+                data:[],
+                status:1,
+                msg:'success'
+            };
             const host = ctx.host;
             const ip = ctx.ip;
             const cookie = ctx.get('cookie');
@@ -23,14 +25,12 @@ module.exports = app => {
             userAgent = uaPaser(userAgent);
             const opt = {...body, ip, cookie, userAgent, host}
             const data = yield ctx.service.errorS.insert(opt);
-            ctx.body = {
-                data:[],
-                status:1,
-                msg:'success'
-            };
+        }
+        countFuc(msg) {
+            timesDB[msg] = timesDB[msg] || 0;
+            timesDB[msg]++;
         }
         filterFuc(obj) {
-            console.log(typeDB);
             let res = false;
             let status = 200;
             let body = 'success';
