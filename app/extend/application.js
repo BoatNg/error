@@ -2,6 +2,7 @@ const utils = require('./../../node_modules/egg-logger/lib/utils');
 utils.defaultFormatter = function(meta) {
   return `[${meta.date}]` + ' ' + meta.level + ' ' + meta.pid + ' ' + meta.message;
 }
+const NodeCache = require( "node-cache" );
 module.exports = {
   dndcLogger(param) {
     // this 就是 app 对象，在其中可以调用 app 上的其他方法，或访问属性
@@ -10,4 +11,5 @@ module.exports = {
   keyLogger(msg, info) {
     return this.getLogger('keyLogger').info(msg, info);
   },
+  cache:new NodeCache()
 }
