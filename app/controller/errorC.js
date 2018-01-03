@@ -24,13 +24,15 @@ module.exports = app => {
             let userAgent = ctx.get('User-Agent');
             userAgent = uaPaser(userAgent);
             const opt = {...body, ip, cookie, userAgent, host}
-            const data = yield ctx.service.errorS.insert(opt);
+            console.log("========================1========================") 
+            app.myEvent.emit('logEvent', opt); 
+            console.log("========================3========================") 
         }
         countFuc(msg) {
             timesDB[msg] = timesDB[msg] || 0;
             timesDB[msg]++;
         }
-        filterFuc(obj) {
+        filterFuc(obj) { 
             let res = false;
             let status = 200;
             let body = 'success';

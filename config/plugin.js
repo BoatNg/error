@@ -21,4 +21,4 @@ module.cluster = {
 exports.logrotator = {
   enable: true,
   package: 'egg-logrotator',
-};
+}; 

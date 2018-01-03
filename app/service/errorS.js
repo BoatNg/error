@@ -1,5 +1,11 @@
 const sourceMap = require('source-map');
 const typeDB = require('../myModel/errorMsgType.js');
+function sleep(time) {
+  console.log(new Date());
+  let now = new Date().getTime();
+  while (new Date().getTime() - now < time) { }
+  console.log(new Date());
+}
 module.exports = app => {
     class ErrorService extends app.Service {
         constructor(pra){
@@ -11,8 +17,10 @@ module.exports = app => {
                 'mapSucc':'consumed successfully',
                 'notJs':'not a javascript or url illegal'
             }
-        } 
+        }  
         *insert (data) {
+            sleep(5000);
+            console.log("========================2========================") 
             const { ctx } = this;
             const urlObj = this.parseFile(data.file);
             if(urlObj === null) {
@@ -59,10 +67,11 @@ module.exports = app => {
             // http://s.chebaba.com/3rd/public-select/1.0.0/public-select.js
             // http://jt.chebaba.com/build/default/mobile/js/lib/base-590c0b8dd3.js
             // http://jt.chebaba.com/build/default/mobile/js/page/nissan-index-94d2edead0.js
+            // test.js
             let arr = url.split('/');
             let file = arr.pop();
             let reg = new RegExp(/\.js$/,'i');
-            if(!reg.test(file)) {
+            if(!reg.test(file) || arr.length === 0) {
                 return null;
             }
             let numReg = new RegExp(/\d+/,'g');
